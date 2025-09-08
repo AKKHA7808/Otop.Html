@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTOP แผนที่ผลิตภัณฑ์ชุมชน</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>OTOP - หนึ่งตำบล หนึ่งผลิตภัณฑ์</h1>
+            <p>แผนที่แสดงผลิตภัณฑ์ชุมชนทั่วประเทศไทย</p>
+        </header>
+        
+        <div class="controls">
+            <div class="info-panel">
+                <h3>ข้อมูล OTOP</h3>
+                <div id="product-count">กำลังโหลดข้อมูล...</div>
+            </div>
+        </div>
+        
+        <div id="map"></div>
+        
+        <div class="product-list">
+            <h3>รายการผลิตภัณฑ์</h3>
+            <div id="products"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script async defer 
+        src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+    </script>
+</body>
+</html>
