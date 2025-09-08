@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>ข้อมูลสินค้า OTOP</h2>
+<table border="1" cellpadding="5" cellspacing="0">
+    <thead>
+        <tr>
+            <th>ชื่อสินค้า OTOP</th>
+            <th>อปท.</th>
+            <th>อำเภอ</th>
+            <th>จังหวัด</th>
+            <th>ชื่อสถานที่จัดจำหน่าย</th>
+            <th>ที่อยู่</th>
+            <th>เบอร์โทรศัพท์</th>
+            <th>LAT</th>
+            <th>LONG</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for item in otop_list %}
+        <tr>
+            <td>{{ item['ชื่อสินค้า OTOP'] }}</td>
+            <td>{{ item['อปท.'] }}</td>
+            <td>{{ item['อำเภอ'] }}</td>
+            <td>{{ item['จังหวัด'] }}</td>
+            <td>{{ item['ชื่อสถานที่จัดจำหน่าย']|default:'' }}</td>
+            <td>{{ item['ที่อยู่']|default:'' }}</td>
+            <td>{{ item['เบอร์โทรศัพท์']|default:'' }}</td>
+            <td>{{ item['LAT']|default:'' }}</td>
+            <td>{{ item['LONG']|default:'' }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
