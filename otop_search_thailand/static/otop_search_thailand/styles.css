@@ -1,0 +1,61 @@
+/* Google Map Section Styling */
+#otop-map-section .card {
+	border-radius: 1.5rem;
+	overflow: hidden;
+}
+#otop-map {
+	min-height: 350px;
+	background: #e9ecef;
+	border-radius: 1rem;
+	box-shadow: 0 2px 16px rgba(44,62,80,0.10);
+}
+#otop-map-section .section-heading {
+	color: #18bc9c;
+}
+#otop-map-section .divider-custom-icon {
+	color: #e74c3c;
+}
+/* Divider Custom (Freelancer style) */
+.divider-custom {
+	margin: 1.5rem 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.divider-custom-line {
+	width: 100px;
+	height: 4px;
+	background: #2c3e50;
+	border-radius: 2px;
+	margin: 0 1rem;
+}
+.divider-custom-icon {
+	color: #18bc9c;
+	font-size: 2rem;
+}
+.masthead {
+	background: linear-gradient(135deg, #18bc9c 0%, #2c3e50 100%);
+	color: #fff;
+}
+.section-heading {
+	font-weight: 700;
+	letter-spacing: 1px;
+}
+.section-subheading {
+	font-size: 1.1rem;
+	color: #6c757d;
+}
+.card {
+	border-radius: 1rem;
+}
+.table thead th {
+	vertical-align: middle;
+}
+.navbar {
+	box-shadow: 0 2px 8px rgba(44,62,80,0.08);
+}
+.footer {
+	background: #2c3e50;
+	color: #fff;
+}
+/* copied from startbootstrap-freelancer-gh-pages/css/styles.css */

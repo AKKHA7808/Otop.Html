@@ -1,34 +1,112 @@
 {% extends 'base.html' %}
+{% load static otop_extras %}
 {% block content %}
-<h2>ข้อมูลสินค้า OTOP</h2>
-<table border="1" cellpadding="5" cellspacing="0">
-    <thead>
-        <tr>
-            <th>ชื่อสินค้า OTOP</th>
-            <th>อปท.</th>
-            <th>อำเภอ</th>
-            <th>จังหวัด</th>
-            <th>ชื่อสถานที่จัดจำหน่าย</th>
-            <th>ที่อยู่</th>
-            <th>เบอร์โทรศัพท์</th>
-            <th>LAT</th>
-            <th>LONG</th>
-        </tr>
-    </thead>
-    <tbody>
-    {% for item in otop_list %}
-        <tr>
-            <td>{{ item['ชื่อสินค้า OTOP'] }}</td>
-            <td>{{ item['อปท.'] }}</td>
-            <td>{{ item['อำเภอ'] }}</td>
-            <td>{{ item['จังหวัด'] }}</td>
-            <td>{{ item['ชื่อสถานที่จัดจำหน่าย']|default:'' }}</td>
-            <td>{{ item['ที่อยู่']|default:'' }}</td>
-            <td>{{ item['เบอร์โทรศัพท์']|default:'' }}</td>
-            <td>{{ item['LAT']|default:'' }}</td>
-            <td>{{ item['LONG']|default:'' }}</td>
-        </tr>
-    {% endfor %}
-    </tbody>
-</table>
+<section class="page-section" id="otop-table">
+    <div class="container">
+        <div class="text-center">
+            <h2 class="section-heading text-uppercase mb-3">ข้อมูลสินค้า OTOP</h2>
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <p class="section-subheading text-muted mb-4">ตารางแสดงข้อมูลสินค้า OTOP จากแต่ละพื้นที่ในประเทศไทย</p>
+        </div>
+        {% if error_message %}
+            <div class="alert alert-danger">{{ error_message }}</div>
+        {% endif %}
+        <div class="card shadow mb-5">
+            <div class="card-body p-4">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover align-middle">
+                        <thead class="table-dark text-center">
+                            <tr>
+                                <th>ชื่อสินค้า OTOP</th>
+                                <th>อปท.</th>
+                                <th>อำเภอ</th>
+                                <th>จังหวัด</th>
+                                <th>ชื่อสถานที่จัดจำหน่าย</th>
+                                <th>ที่อยู่</th>
+                                <th>เบอร์โทรศัพท์</th>
+                                <th>LAT</th>
+                                <th>LONG</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in otop_list %}
+                            <tr>
+                                <td>{{ item|get_item:"ชื่อสินค้า OTOP" }}</td>
+                                <td>{{ item|get_item:"อปท." }}</td>
+                                <td>{{ item|get_item:"อำเภอ" }}</td>
+                                <td>{{ item|get_item:"จังหวัด" }}</td>
+                                <td>{{ item|get_item:"ชื่อสถานที่จัดจำหน่าย"|default:'' }}</td>
+                                <td>{{ item|get_item:"ที่อยู่"|default:'' }}</td>
+                                <td>{{ item|get_item:"เบอร์โทรศัพท์"|default:'' }}</td>
+                                <td>{{ item|get_item:"LAT"|default:'' }}</td>
+                                <td>{{ item|get_item:"LONG"|default:'' }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Google Map Section -->
+<section class="page-section bg-light py-5" id="otop-map-section">
+    <div class="container">
+        <div class="text-center mb-4">
+            <h3 class="section-heading text-uppercase">แผนที่แสดงตำแหน่งสินค้า OTOP</h3>
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-map-marker-alt"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <p class="section-subheading text-muted mb-4">ดูตำแหน่งร้านค้าและสินค้า OTOP บนแผนที่ประเทศไทย</p>
+        </div>
+        <div class="card shadow-lg border-0 mx-auto" style="max-width: 900px;">
+            <div class="card-body p-0">
+                <div id="otop-map" style="width: 100%; height: 480px; border-radius: 1rem;"></div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+    // เตรียมข้อมูลตำแหน่งจาก Django context
+    const otopLocations = [
+        {% for item in otop_list %}
+            {
+                name: `{{ item|get_item:"ชื่อสินค้า OTOP"|escapejs }}`,
+                lat: {{ item|get_item:"LAT"|default:'null' }},
+                lng: {{ item|get_item:"LONG"|default:'null' }},
+                address: `{{ item|get_item:"ที่อยู่"|escapejs }}`
+            },
+        {% endfor %}
+    ];
+
+    function initMap() {
+        const center = otopLocations.find(l => l.lat && l.lng) || {lat: 13.736717, lng: 100.523186};
+        const map = new google.maps.Map(document.getElementById('otop-map'), {
+            zoom: 7,
+            center: {lat: parseFloat(center.lat), lng: parseFloat(center.lng)}
+        });
+        otopLocations.forEach(loc => {
+            if(loc.lat && loc.lng) {
+                const marker = new google.maps.Marker({
+                    position: {lat: parseFloat(loc.lat), lng: parseFloat(loc.lng)},
+                    map,
+                    title: loc.name
+                });
+                const infowindow = new google.maps.InfoWindow({
+                    content: `<b>${loc.name}</b><br>${loc.address}`
+                });
+                marker.addListener('click', () => infowindow.open(map, marker));
+            }
+        });
+    }
+</script>
+<!-- ใส่ Google Maps API Key ของคุณด้านล่างนี้ -->
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyATRuubv3L9TEtdgtTk0tAziudpHnTiQys&callback=initMap" async defer></script>
 {% endblock %}
