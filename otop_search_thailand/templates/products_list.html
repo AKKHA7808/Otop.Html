@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}ข้อมูลสินค้า OTOP{% endblock %}
+
+{% block extra_css %}
+<style>
+  #otopTable th, #otopTable td { vertical-align: middle; }
+</style>
+{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">ข้อมูลสินค้า OTOP ทั้งหมด</h2>
+<div class="table-responsive">
+  <table id="otopTable" class="table table-striped table-bordered align-middle">
+    <thead class="table-secondary">
+      <tr>
+        <th>ชื่อสินค้า</th>
+        <th>จังหวัด</th>
+        <th>หมวดหมู่</th>
+        <th>เรตติ้ง <i class="bi bi-star-fill text-warning"></i></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for product in products %}
+      <tr>
+        <td>{{ product.name }}</td>
+        <td>
+          <a href="{% url 'province_detail' slug=product.province.slug %}">
+            <i class="bi bi-geo-alt-fill text-primary"></i> {{ product.province.name }}
+          </a>
+        </td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.rating|floatformat:1 }}</td>
+      </tr>
+      {% empty %}
+      <tr><td colspan="4" class="text-center text-muted">ไม่มีข้อมูลสินค้า</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.jQuery && $('#otopTable').length) {
+      $('#otopTable').DataTable({
+        language: {
+          url: '//cdn.datatables.net/plug-ins/1.13.10/i18n/th.json'
+        }
+      });
+    }
+  });
+</script>
+{% endblock %}

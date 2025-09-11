@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}OTOP ประเทศไทย – โฮม{% endblock %}
+{% block extra_css %}
+<style>
+    :root{
+        --primary:#e74c3c;
+        --primary-dark:#c0392b;
+        --hero-bg:#2c3e50;
+        --ink:#1c2430;
+    }
+    .hero{ background:var(--hero-bg); color:#fff; padding:7rem 0 4rem; }
+    .hero-title{ font-weight:800; letter-spacing:.02em; text-shadow:0 3px 10px rgba(0,0,0,.25); }
+    .cta-btn{ background:var(--primary); border:none; }
+    .cta-btn:hover{ background:var(--primary-dark); }
+    .stats{ background:var(--primary); color:#fff; padding:3rem 0; }
+    .stat-num{ font-size:clamp(2rem,4vw,3rem); font-weight:800; line-height:1; }
+    .features{ padding:4rem 0 3rem; }
+    .feature-card{ background:#fff; border:1px solid rgba(0,0,0,.06); border-radius:1rem; padding:2rem 1.5rem; height:100%; box-shadow:0 8px 24px rgba(0,0,0,.05); }
+    .feature-icon{ width:42px;height:42px; border:2px solid #f0ad4e; border-radius:.75rem; display:inline-flex; align-items:center; justify-content:center;}
+    .footer a{ color:#dbe7ff; text-decoration:none } .footer a:hover{ text-decoration:underline }
+</style>
+{% endblock %}
+{% block content %}
+<!-- HERO -->
+<section class="hero text-center">
+    <div class="container">
+        <h2 class="text-warning fw-bold mb-3" style="letter-spacing:.03em;">OTOP Thailand</h2>
+        <h1 class="hero-title display-4 mb-3">OTOP ประเทศไทย</h1>
+        <p class="fs-5 mb-4">หนึ่งตำบล หนึ่งผลิตภัณฑ์ ภูมิปัญญาท้องถิ่นไทย</p>
+        <a href="#all-products" class="btn btn-lg cta-btn px-4 py-2 rounded-3">
+            <i class="bi bi-box-seam me-2"></i>สำรวจสินค้า OTOP
+        </a>
+    </div>
+</section>
+<!-- STATS -->
+<section class="stats">
+    <div class="container">
+        <div class="row text-center g-4">
+            <div class="col-6 col-lg-3"><div class="stat-num" data-count="77">0</div><div>จังหวัด</div></div>
+            <div class="col-6 col-lg-3"><div class="stat-num" data-count="1250">0</div><div>ผลิตภัณฑ์+</div></div>
+            <div class="col-6 col-lg-3"><div class="stat-num" data-count="15">0</div><div>หมวดหมู่</div></div>
+            <div class="col-6 col-lg-3"><div class="stat-num" data-count="850">0</div><div>ชุมชน+</div></div>
+        </div>
+    </div>
+</section>
+<!-- FEATURES -->
+<header class="masthead bg-primary text-white text-center pt-5" style="padding-top: 8rem; padding-bottom: 2rem;">
+    <div class="container d-flex align-items-center flex-column">
+        <img class="masthead-avatar mb-4" src="{% static 'otop_search_thailand/assets/img/otop_logo.png' %}" alt="โลโก้ OTOP"
+                 style="width: 220px; height: 220px; max-width: 90vw; object-fit: contain; background: #fff; box-shadow: 0 4px 24px rgba(44,62,80,0.10); border-radius: 1.5rem; padding: 8px;" />
+        <h1 class="masthead-heading text-uppercase mb-0">OTOP Thailand</h1>
+        <div class="d-flex align-items-center gap-3 my-3">
+            <hr class="flex-grow-1 text-white opacity-75" />
+            <i class="bi bi-star-fill"></i>
+            <hr class="flex-grow-1 text-white opacity-75" />
+        </div>
+        <p class="masthead-subheading fw-light mb-0">หนึ่งตำบล หนึ่งผลิตภัณฑ์</p>
+    </div>
+</header>
+
+<!-- เพิ่มเนื้อหาหรือฟีเจอร์อื่น ๆ ของหน้าแรกที่นี่ -->
+<!-- เมนูเพิ่มเติม (จาก navbar เดิม) -->
+<section class="container my-5">
+    <div class="row justify-content-center g-3">
+        <div class="col-auto">
+            <a href="{% url 'home' %}#content" class="btn btn-outline-primary btn-lg"><i class="bi bi-info-circle"></i> ข้อมูลสินค้า</a>
+        </div>
+        <div class="col-auto">
+            <a href="{% url 'home' %}#features" class="btn btn-outline-success btn-lg"><i class="bi bi-lightbulb"></i> จุดเด่น</a>
+        </div>
+        <div class="col-auto">
+            <a href="{% url 'home' %}#all-products" class="btn btn-outline-warning btn-lg"><i class="bi bi-box-seam"></i> สินค้าทั้งหมด</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+                    <h5 class="fw-bold mb-2">สนับสนุนชุมชน</h5>

@@ -1,49 +1,31 @@
-/* Google Map Section Styling */
-#otop-map-section .card {
-	border-radius: 1.5rem;
-	overflow: hidden;
-}
-#otop-map {
-	min-height: 350px;
-	background: #e9ecef;
-	border-radius: 1rem;
-	box-shadow: 0 2px 16px rgba(44,62,80,0.10);
-}
-#otop-map-section .section-heading {
-	color: #18bc9c;
-}
-#otop-map-section .divider-custom-icon {
-	color: #e74c3c;
-}
-/* Divider Custom (Freelancer style) */
-.divider-custom {
-	margin: 1.5rem 0;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-.divider-custom-line {
-	width: 100px;
-	height: 4px;
-	background: #2c3e50;
-	border-radius: 2px;
-	margin: 0 1rem;
-}
-.divider-custom-icon {
-	color: #18bc9c;
-	font-size: 2rem;
-}
-.masthead {
-	background: linear-gradient(135deg, #18bc9c 0%, #2c3e50 100%);
-	color: #fff;
-}
-.section-heading {
-	font-weight: 700;
-	letter-spacing: 1px;
-}
+/* โทนรวม */
+:root{
+	--primary:#e74c3c;
+	--primary-dark:#c0392b;
+	--hero-bg:#2c3e50;
+	color: var(--otop-primary);
 .section-subheading {
-	font-size: 1.1rem;
-	color: #6c757d;
+
+	:root {
+		--otop-primary: #0d6efd;
+		--otop-secondary: #6c757d;
+		--otop-bg: #f8fafc;
+		--otop-footer: #343a40;
+	}
+	body {
+		background: var(--otop-bg);
+		font-family: 'Sarabun', 'Prompt', Tahoma, Arial, sans-serif;
+	}
+	.navbar { box-shadow: 0 2px 8px #0001; }
+	.navbar .navbar-brand { color: var(--otop-primary) !important; }
+	.navbar .nav-link.active, .navbar .nav-link:focus, .navbar .nav-link:hover { color: var(--otop-primary) !important; }
+	.footer { background: var(--otop-footer); color: #fff; }
+	.table th, .table td { vertical-align: middle; }
+	.table-striped > tbody > tr:nth-of-type(odd) { background-color: #f2f6fa; }
+	[id] { scroll-margin-top: 80px; }
+	html { scroll-behavior: smooth; }
+	a { transition: color .15s; }
+	a:hover { color: var(--otop-primary); }
 }
 .card {
 	border-radius: 1rem;
@@ -58,4 +40,8 @@
 	background: #2c3e50;
 	color: #fff;
 }
+html { scroll-behavior: smooth; }
+
+/* ชดเชยความสูง navbar fixed-top เวลาจัมพ์ด้วย #hash */
+main#content, section[id] { scroll-margin-top: 6rem; }
 /* copied from startbootstrap-freelancer-gh-pages/css/styles.css */

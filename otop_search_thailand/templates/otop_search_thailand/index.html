@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}OTOP Thailand – หน้าแรก{% endblock %}
+
+{% block content %}
+<section class="hero text-center">
+    <div class="container">
+        <h1 class="hero-title display-3 mb-3">OTOP Thailand</h1>
+        <p class="hero-sub fs-4 mb-4">หนึ่งตำบล หนึ่งผลิตภัณฑ์ ภูมิปัญญาท้องถิ่นไทย</p>
+        <a href="{% url 'otop_about' %}" class="btn btn-lg btn-primary px-4 py-2 rounded-3">
+            เกี่ยวกับโครงการ OTOP
+        </a>
+    </div>
+</section>
+{% endblock %}

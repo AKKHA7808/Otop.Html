@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}อัปโหลดสินค้า CSV{% endblock %}
+{% block content %}
+<div class="container py-4">
+  <h2 class="mb-3">อัปโหลดสินค้า (CSV)</h2>
+  <form method="post" enctype="multipart/form-data" class="mb-3">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">อัปโหลด</button>
+  </form>
+  <div>
+    <strong>ตัวอย่างไฟล์ CSV:</strong>
+    <pre>ชื่อสินค้า,จังหวัด,หมวดหมู่,เรตติ้ง
+ผ้าไหมมัดหมี่,ขอนแก่น,ผ้า/เครื่องแต่งกาย,4.5
+น้ำพริกปลาร้า,อุบลราชธานี,อาหาร,4.2
+</pre>
+  </div>
+  {% if result %}
+    <div class="alert alert-info mt-3">
+      เพิ่มใหม่ {{ result.added }} รายการ, ข้าม {{ result.skipped }} รายการ
+    </div>
+  {% endif %}
+</div>
+{% endblock %}
